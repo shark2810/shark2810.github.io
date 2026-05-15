@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL & Data Analytical Projects | Đoàn Thanh Trúc</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      background: rgba(168, 85, 247, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #a1a1aa;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .projects-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #a855f7, #ec4899);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(168, 85, 247, 0.2);
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-number {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .project-description {
+      color: #d4d4d8;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tech-tag {
+      background: rgba(168, 85, 247, 0.1);
+      color: #a855f7;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #a1a1aa;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .container {
+        padding: 1rem;
+      }
+    }
+
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .floating-element {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(168, 85, 247, 0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Toggle Styles */
+    .project-toggles {
+      margin-top: 1.5rem;
+    }
+
+    .toggle-section {
+      margin-bottom: 1rem;
+    }
+
+    .toggle-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+    }
+
+    .toggle-icon {
+      font-size: 1.2rem;
+    }
+
+    .toggle-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .toggle-arrow {
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-btn.active .toggle-arrow {
+      transform: rotate(180deg);
+    }
+
+    .toggle-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 1px solid rgba(168, 85, 247, 0.2);
+      border-right: 1px solid rgba(168, 85, 247, 0.2);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 0 0 12px 12px;
+      transition: all 0.4s ease;
+      margin-top: -1px;
+    }
+
+    .toggle-content.active {
+        max-height: none;
+        padding: 1.5rem;
+    }
+
+    .toggle-content p {
+      color: #d4d4d8;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      background: rgba(168, 85, 247, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .github-link:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+    }
+
+    .github-icon {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-elements">
+    <div class="floating-element" style="width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="floating-element" style="width: 40px; height: 40px; top: 60%; right: 10%; animation-delay: 2s;"></div>
+    <div class="floating-element" style="width: 80px; height: 80px; top: 80%; left: 60%; animation-delay: 4s;"></div>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <a href="index.html#projects" class="back-link">
+        ← Back to Portfolio
+      </a>
+      <h1 class="section-title">SQL & Data Analytical Projects</h1>
+      <p class="subtitle">Transforming raw e-commerce event logs into actionable business intelligence through advanced querying</p>
+    </div>
+
+    <div class="projects-grid">
+
+<!-- Project 1 -->
+<div class="project-card">
+  <div class="project-header">
+    <div class="project-number">1</div>
+    <h3 class="project-title">E-commerce Sales Funnel Analysis</h3>
+  </div>
+
+  <p class="project-description">
+    In this project, a full sales funnel was analyzed for an e-commerce platform — tracking user 
+    behavior across five stages from page view to purchase, calculating step-by-step and overall 
+    conversion rates, evaluating marketing channel performance, and measuring time-to-conversion 
+    for each buyer.
+  </p>
+
+  <div class="tech-stack">
+    <span class="tech-tag">SQL</span>
+    <span class="tech-tag">Data Analysis</span>
+    <span class="tech-tag">Funnel Analytics</span>
+    <span class="tech-tag">CTE</span>
+    <span class="tech-tag">Business Intelligence</span>
+  </div>
+
+  <div class="project-toggles">
+    <div class="toggle-section">
+      <button class="toggle-btn" onclick="toggleSection(this)">
+        <span class="toggle-icon">⚙️</span>
+        <span class="toggle-text">Project Documentation</span>
+        <span class="toggle-arrow">▼</span>
+      </button>
+      <div class="toggle-content">
+
+        <h1>+ E-commerce Sales Funnel Analysis +</h1>
+
+        <h2>Objective</h2>
+        <p>
+          This SQL project analyzes the full purchase journey of users on an e-commerce platform.
+          Using a single event-log table <code>user_events</code>, the project identifies how many 
+          users reach each funnel stage, where they drop off, which marketing channels drive the 
+          most revenue, and how long buyers take to convert.
+        </p>
+
+        <h2>Part 1: Defining Funnel Stages & Counting Users</h2>
+        <pre><code>WITH funnel_stages AS (
+  SELECT
+    user_id,
+    MAX(CASE WHEN event_type = 'page_view'      THEN 1 ELSE 0 END) AS reached_page_view,
+    MAX(CASE WHEN event_type = 'add_to_cart'    THEN 1 ELSE 0 END) AS reached_add_to_cart,
+    MAX(CASE WHEN event_type = 'checkout_start' THEN 1 ELSE 0 END) AS reached_checkout,
+    MAX(CASE WHEN event_type = 'payment_info'   THEN 1 ELSE 0 END) AS reached_payment,
+    MAX(CASE WHEN event_type = 'purchase'       THEN 1 ELSE 0 END) AS reached_purchase
+  FROM user_events
+  GROUP BY user_id
+)
+</code></pre>
+        <p>
+          Each user is flagged (0 or 1) for whether they reached each of the five funnel stages:
+          <code>page_view → add_to_cart → checkout_start → payment_info → purchase</code>.
+          Results are aggregated to show user count at each stage, the percentage relative to 
+          the top of the funnel, and the number of users dropped at each step.
+        </p>
+
+        <h2>Part 2: Calculating Conversion Rates</h2>
+        <pre><code>ROUND(100.0 * cnt_checkout / cnt_add_to_cart, 1) AS step_conversion_rate,
+ROUND(100.0 * cnt_checkout / cnt_page_view,   1) AS overall_conversion_rate
+</code></pre>
+        <p>
+          Two conversion metrics are added to the funnel report: <strong>step conversion rate</strong>
+          (how many users proceeded from the previous step) and <strong>overall conversion rate</strong>
+          (how many users from the top of the funnel reached this stage). This helps pinpoint the 
+          exact bottleneck in the purchase journey.
+        </p>
+
+        <h2>Part 3: Marketing Channel Analysis</h2>
+        <pre><code>ROUND(100.0 * users_purchased / NULLIF(users_page_view, 0), 1) AS conversion_rate,
+ROUND(total_revenue / NULLIF(total_users, 0), 2)               AS revenue_per_user
+</code></pre>
+        <p>
+          Each traffic source (e.g. Organic, Paid, Social, Email) is evaluated across multiple 
+          dimensions: total users and events, funnel progression per channel, conversion rate 
+          from view to purchase, total revenue, average order value, and revenue per user — 
+          enabling direct ROI comparison across channels.
+        </p>
+
+        <h2>Part 4: Time-to-Conversion Analysis</h2>
+        <pre><code>DATEDIFF(MINUTE, time_page_view, time_add_to_cart) AS mins_view_to_cart,
+DATEDIFF(MINUTE, time_page_view, time_purchase)    AS total_mins_to_purchase
+</code></pre>
+        <p>
+          For every user who completed a purchase, the time (in minutes) between each funnel 
+          step is calculated. A summary layer then outputs system-wide averages, as well as 
+          the fastest and slowest conversion times — providing insight into buyer urgency 
+          and friction points.
+        </p>
+
+        <h2>Conclusion</h2>
+        <p>
+          This project demonstrates a complete end-to-end funnel analysis using advanced SQL 
+          techniques including CTEs, conditional aggregation, <code>NULLIF</code> for safe 
+          division, <code>DATEDIFF</code> for time calculations, and <code>UNION ALL</code> 
+          for vertical result formatting. The queries are production-ready and applicable to 
+          any BI or analytics reporting environment.
+        </p>
+
+      </div>
+    </div>
+
+    <div class="toggle-section">
+      <button class="toggle-btn" onclick="toggleSection(this)">
+        <span class="toggle-icon">⚙️</span>
+        <span class="toggle-text">Technical Details</span>
+        <span class="toggle-arrow">▼</span>
+      </button>
+      <div class="toggle-content">
+        <p>
+          All technical steps behind this project — including funnel stage definition, 
+          conversion rate calculation, channel segmentation, and time-to-conversion analysis — 
+          are fully documented in the SQL file linked below.
+        </p>
+        <p>
+          If you're interested in seeing the complete query logic or replicating the analysis 
+          on your own dataset, you can view or download the SQL file from my GitHub repository:
+        </p>
+        <p>
+          <a href="https://github.com/shark2810/Ecommerce-Sales-Funnel-Analysis" class="github-link" target="_blank">
+            <span class="github-icon">⭐</span>
+            View on GitHub
+          </a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+  <script>
+  function toggleSection(button) {
+    const content = button.nextElementSibling;
+    const isActive = content.classList.contains('active');
+
+    // Close all other toggles in the same project card
+    const projectCard = button.closest('.project-card');
+    const allToggleContents = projectCard.querySelectorAll('.toggle-content');
+    const allToggleButtons = projectCard.querySelectorAll('.toggle-btn');
+
+    allToggleContents.forEach(tc => tc.classList.remove('active'));
+    allToggleButtons.forEach(tb => tb.classList.remove('active'));
+
+    // Toggle the clicked section
+    if (!isActive) {
+      content.classList.add('active');
+      button.classList.add('active');
+
+      // Delay the scroll a little to allow content to expand
+      setTimeout(() => {
+        const yOffset = -100; // Adjust this if you have a sticky navbar
+        const y = button.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }, 200); // delay helps ensure content has rendered
+    }
+  }
+
+  // Add stagger animation to project cards
+  document.addEventListener('DOMContentLoaded', function () {
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.1}s`;
+      card.style.animation = 'fadeInUp 0.6s ease forwards';
+    });
+  });
+
+  // Fade-in CSS
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project-card {
+      opacity: 0;
+    }
+  `;
+  document.head.appendChild(style);
+</script>

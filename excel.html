@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel & Financial Automation Projects | Đoàn Thanh Trúc</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      background: rgba(168, 85, 247, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #a1a1aa;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .projects-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #a855f7, #ec4899);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(168, 85, 247, 0.2);
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-number {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .project-description {
+      color: #d4d4d8;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tech-tag {
+      background: rgba(168, 85, 247, 0.1);
+      color: #a855f7;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #a1a1aa;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .container {
+        padding: 1rem;
+      }
+    }
+
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .floating-element {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(168, 85, 247, 0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Toggle Styles */
+    .project-toggles {
+      margin-top: 1.5rem;
+    }
+
+    .toggle-section {
+      margin-bottom: 1rem;
+    }
+
+    .toggle-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+    }
+
+    .toggle-icon {
+      font-size: 1.2rem;
+    }
+
+    .toggle-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .toggle-arrow {
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-btn.active .toggle-arrow {
+      transform: rotate(180deg);
+    }
+
+    .toggle-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 1px solid rgba(168, 85, 247, 0.2);
+      border-right: 1px solid rgba(168, 85, 247, 0.2);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 0 0 12px 12px;
+      transition: all 0.4s ease;
+      margin-top: -1px;
+    }
+
+    .toggle-content.active {
+      max-height: 300px;
+      padding: 1.5rem;
+    }
+
+    .toggle-content p {
+      color: #d4d4d8;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      background: rgba(168, 85, 247, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .github-link:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+    }
+
+    .github-icon {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-elements">
+    <div class="floating-element" style="width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="floating-element" style="width: 40px; height: 40px; top: 60%; right: 10%; animation-delay: 2s;"></div>
+    <div class="floating-element" style="width: 80px; height: 80px; top: 80%; left: 60%; animation-delay: 4s;"></div>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <a href="index.html#projects" class="back-link">
+        ← Back to Portfolio
+      </a>
+      <<h1 class="section-title">VNM Financial Statement Analysis Dashboard</h1>
+      <p class="subtitle">Financial statement analysis and dashboard automation using Excel, VBA Macros, Pivot Tables, and data visualization techniques (2017–2021)</p>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-number">1</div>
+          <h3 class="project-title">Vinamilk (VNM) Capital Structure Analysis & Automation</h3>
+        </div>
+        
+        <p class="project-description">
+          Developed an automated financial analysis tool for Vinamilk (VNM) covering the 2017–2021 period. The project involved trilingual data standardization, automated capital calculation using VBA Macros, and interactive KPI visualization.
+        </p>
+
+        <div class="tech-stack">
+          <span class="tech-tag">Excel VBA (Macros)</span>
+          <span class="tech-tag">Pivot Tables</span>
+          <span class="tech-tag">Financial Modeling</span>
+          <span class="tech-tag">Table Joining</span>
+          <span class="tech-tag">Power Query</span>
+        </div>
+
+        <div class="project-toggles">
+          <div class="toggle-section">
+            <button class="toggle-btn" onclick="toggleSection(this)">
+              <span class="toggle-icon">📈</span>
+              <span class="toggle-text">Project Overview & Impact</span>
+              <span class="toggle-arrow">▼</span>
+            </button>
+            <div class="toggle-content">
+              <p>Processed raw financial statements of Vinamilk from 2017 to 2021[cite: 19]. By automating capital source calculations, the project provided a clear view of debt-to-equity trends and financial stability, enabling faster strategic assessment of the company's capital structure.</p>
+            </div>
+          </div>
+          
+          <div class="toggle-section">
+            <button class="toggle-btn" onclick="toggleSection(this)">
+              <span class="toggle-icon">⚙️</span>
+              <span class="toggle-text">Automation & Technical Details</span>
+              <span class="toggle-arrow">▼</span>
+            </button>
+            <div class="toggle-content">
+              <p>Utilized <strong>VBA Macros</strong> to automate repetitive calculation tasks and data updates. Performed table joining to merge multi-year data into a unified model, used <strong>Pivot Tables</strong> for dynamic data exploration, and built a comprehensive <strong>Excel Dashboard</strong> for intuitive KPI tracking[cite: 24, 32].</p>
+              <a href="https://github.com/shark2810/VNM-Financial-Statement-Analysis-Dashboard" class="github-link" target="_blank">
+                <span class="github-icon">🐙</span>
+                View Project on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  <script>
+    function toggleSection(button) {
+      const content = button.nextElementSibling;
+      const isActive = content.classList.contains('active');
+      
+      // Close all other toggles in the same project card
+      const projectCard = button.closest('.project-card');
+      const allToggleContents = projectCard.querySelectorAll('.toggle-content');
+      const allToggleButtons = projectCard.querySelectorAll('.toggle-btn');
+      
+      allToggleContents.forEach(tc => tc.classList.remove('active'));
+      allToggleButtons.forEach(tb => tb.classList.remove('active'));
+      
+      // Toggle the clicked section
+      if (!isActive) {
+        content.classList.add('active');
+        button.classList.add('active');
+      }
+    }
+
+    // Add smooth scroll behavior and enhanced interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add stagger animation to project cards
+      const projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.style.animation = 'fadeInUp 0.6s ease forwards';
+      });
+    });
+
+    // Add CSS for the fade-in animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .project-card {
+        opacity: 0;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
